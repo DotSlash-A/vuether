@@ -1,5 +1,6 @@
 require('dotenv').config()
 const axios = require("axios")
+import cors from "cors"
 
 
 const express = require('express')
@@ -10,6 +11,8 @@ const { log } = require('console')
 app.use(bodyParser.json())
 const baseurl = "https://api.openweathermap.org/data/2.5/weather"
 const jwt = require('jsonwebtoken');
+
+app.use(cors())
 
 
 
@@ -29,7 +32,7 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
-app.post('/api/weather',loginRequired, async (req, res) => {
+app.post('/api/weather', async (req, res) => {
   const { city } = req.body
   if (!city) {
     return res.status(404).send(`No such city`)
