@@ -3,9 +3,10 @@
     <div class="columns">
       <div class="column is-half">
         <div class="is-flex is-flex-direction-column">
-          <p class="is-size-5 has-text-weight-semibold mb-2">
+          <p class="is-size-5 has-text-weight-semibold mb-2 has-text-white">
             Enter your city:
           </p>
+          
 
           <div class="is-flex is-flex-direction-row">
             <input id="city" type="text" name="city" v-model="city" placeholder="Bengaluru" class="input is-rounded mr-2"

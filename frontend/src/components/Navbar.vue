@@ -1,63 +1,14 @@
 <template>
-  <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="https://bulma.io">
-        <img
-          src="https://bulma.io/images/bulma-logo.png"
-          width="112"
-          height="28"
-        />
-      </a>
+  <nav class="container is-max-desktop p-4">
+    <div class="is-flex is-flex-direction-row is-align-items-center">
 
-      <a
-        role="button"
-        class="navbar-burger"
-        aria-label="menu"
-        aria-expanded="false"
-        data-target="navbarBasicExample"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-    </div>
+      <p class="is-flex-grow-2 m-4 has-text-white"> <i class="fa-solid fa-location-dot p-1">Hyderabad</i></p>
+      <input type="text" placeholder="search city..."
+        class="input is-rounded m-4 has-background-dark has-text-white no-border" />
 
-    <div id="navbarBasicExample" class="navbar-menu">
-      <div class="navbar-start">
-        <RouterLink class="navbar-item" to="/"> Home </RouterLink>
 
-        <RouterLink class="navbar-item" to="/about"> About </RouterLink>
-
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link"> More </a>
-
-          <div class="navbar-dropdown">
-            <RouterLink class="navbar-item" to="/about"> About </RouterLink>
-            <RouterLink class="navbar-item" to="/jobs"> Jobs </RouterLink>
-            <RouterLink class="navbar-item" to="/jobs"> Contact </RouterLink>
-            <hr class="navbar-divider" />
-            <RouterLink class="navbar-item" to="/report">
-              Report an issue
-            </RouterLink>
-          </div>
-        </div>
-      </div>
-
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <div class="buttons">
-            <RouterLink class="button is-rounded is-link" to="/register">
-              <strong>Register</strong>
-            </RouterLink>
-            <RouterLink
-              class="button is-rounded is-primary has-text-black"
-              to="/login"
-            >
-              Log in
-            </RouterLink>
-          </div>
-        </div>
-      </div>
+      <img class="is-rounded m-4" src="https://bulma.io/images/placeholders/128x128.png"
+        style="border-radius: 100px; width:50px; height: 50px;">
     </div>
   </nav>
 </template>
@@ -73,4 +24,11 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.no-border {
+  border: none;
+}
+input::placeholder {
+  color: #E0E1E4;
+}
+</style>
