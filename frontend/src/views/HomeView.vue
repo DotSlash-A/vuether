@@ -1,42 +1,57 @@
 <template>
-  <div class="p-6">
-    <div class="columns">
-      <div class="column is-half">
-        <div class="is-flex is-flex-direction-column">
-          <p class="is-size-5 has-text-weight-semibold mb-2 has-text-white">
-            Enter your city:
-          </p>
-          
-
-          <div class="is-flex is-flex-direction-row">
-            <input id="city" type="text" name="city" v-model="city" placeholder="Bengaluru" class="input is-rounded mr-2"
-              v-on:keypress="invalidCity = false" />
-            <button class="button is-rounded is-dark" @click="fetchWeather">
-              Get Weather 🌦️
-            </button>
-          </div>
-
-          <small class="ml-4 mt-2 has-text-danger is-size-6 is-family-monospace has-text-weight-semibold"
-            v-if="invalidCity">Invalid city name</small>
-        </div>
+  <div class="columns ">
+    <div class="column has-background-success is-three-quarters">
+      <div class="is-flex is-flex-direction-row p-2">
+        <p class="m-2 mr-4">Today</p>
+        <p class="m-2 mr-4">Tomorrow</p>
+        <p class="m-2">Next 7 days</p>
       </div>
-      <div class="column">
-        <!-- <ShowWeather :displayWeather="displayWeather"></ShowWeather> -->
-        <div class="card p-2">
-          <div class="is-flex is-flex-direction-row">
-            <div class="is-flex is-flex-direction-column">
-              <p class="is-size-4">Current Weather</p>
-              <p class="is-size-1 has-text-weight-bold">
-                {{ weatherData.temp }}°C 
-                feels like {{ weatherData.feels_like }}
-              </p>
-            </div>
-            <div class="is-flex is-flex-direction-column"></div>
+
+      <div class="card m-2" style="width: 300px;">
+        <div class="is-flex is-flex-direction-column">
+          <div class="is-flex is-flex-direction-row is-justify-content-space-between" style="background-color: yellowgreen;">
+            <p class="m-1">Monday</p>
+            <p class="m-1">11:42 PM</p>
+
           </div>
         </div>
       </div>
     </div>
+    <div class="column has-background-link">
+      Second column
+    </div>
+    <div class="columns is-mobile">
+  <div class="column is-4 is-offset-8"></div>
+</div>
   </div>
+
+  <div class="columns ">
+    <div class="column has-background-success is-three-quarters .is-variable 0.5rem">
+      <div class="is-flex is-flex-direction-row p-2">
+        <p class="m-2 mr-4">Today</p>
+        <p class="m-2 mr-4">Tomorrow</p>
+        <p class="m-2">Next 7 days</p>
+      </div>
+
+      <div class="card m-2" style="width: 300px;">
+        <div class="is-flex is-flex-direction-column">
+          <div class="is-flex is-flex-direction-row is-justify-content-space-between" style="background-color: yellowgreen;">
+            <p class="m-1">Monday</p>
+            <p class="m-1">11:42 PM</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="column has-background-link">
+      Second column
+    </div>
+    <div class="columns is-mobile">
+  <div class="column is-4 is-offset-8"></div>
+</div>
+  </div>
+
+  
 </template>
 
 <script>
