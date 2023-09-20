@@ -1,21 +1,28 @@
 // import axios from "axios"
 const axios = require("axios")
 
-async function readCache(city, supabase) {
-  const { data, error } = await supabase
-    .from('weather_data')
-    .select()
-    .ilike('name', city)
+async function readCache(city, prisma) {
+  // const { data, error } = await supabase
+  //   .from('weather_data')
+  //   .select()
+  //   .ilike('name', city)
 
-  if (data.length != 0) {
-    const n = data.length
-    const { created_at } = data[n - 1]
+  const latestQuery = await prisma.weather_data.findMany({
+    orderBy: {
+        id: 'desc',
+    },
+    take: 1,
+})
+
+
+  if (latestQuery) {
+    const { created_at } = latestQuery
     const storedDate = new Date(created_at);
     const currentDate = new Date();
     const timeDifference = currentDate - storedDate;
     const differenceInMinutes = timeDifference / (1000 * 60);
     if (differenceInMinutes <= 30) {
-      return data[n - 1]
+      return latestQuery
     }
     else {
       return undefined
@@ -37,9 +44,14 @@ async function CallApiForData(apiurl, supabase) {
       humidity,
       name
     }
-    const { error } = await supabase
-      .from('weather_data')
-      .insert(weather)
+    const newData = await prisma.weather_data.create({
+      data: {
+       ...weather 
+      },
+    })
+    // const { error } = await supabase
+    //   .from('weather_data')
+    //   .insert(weather)
     if (error) {
       return { error: "something went wrong" }
     }
@@ -49,6 +61,11 @@ async function CallApiForData(apiurl, supabase) {
   }
 }
 
+
+
+
+
 module.exports = {
   readCache, CallApiForData
 }
+

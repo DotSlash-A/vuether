@@ -54,13 +54,6 @@ app.post('/api/register', async (req, res) => {
         username: uname,
       },
     })
-    console.log(user)
-
-    // const { data, error } = await supabase
-    //   .from('users')
-    //   .select()
-    //   .eq('username', uname)
-
     if (user) {
       return res.status(409).send(`${uname} already exists`)
     }
@@ -73,11 +66,6 @@ app.post('/api/register', async (req, res) => {
           password:hash,
         },
       })
-      
-      // const { data: userCreated, error: userNotCreated } = await supabase
-      //   .from('users')
-      //   .insert({ username: uname, password: hash })
-      //   .select()
 
       const { id, username, created_at } = newUser
       return res.status(200).send({
@@ -97,12 +85,13 @@ app.post('/api/login', async (req, res) => {
   if (!uname || !password) {
     return res.status(404).send("missing username or password")
   }
-  const { data, error } = await supabase
-    .from('users')
-    .select()
-    .eq('username', uname)
-  // console.log(data);
-  if (data.length == 0) {
+
+  const user = await prisma.users.findUnique({
+    where: {
+      username: uname,
+    },
+  })
+  if (!user) {
     return res.status(404).send("user does not exist")
   }
 
@@ -150,12 +139,12 @@ app.post('/api/weather', loginRequired, async (req, res) => {
   if (!city) {
     return res.status(404).send(`No such city`)
   }
-  const lastrow = await readCache(city, supabase)
+  const lastrow = await readCache(city, prisma)
   if (lastrow) {
     return res.status(200).send(lastrow)
   }
   else {
-    const weather = await CallApiForData(apiurl, supabase)
+    const weather = await CallApiForData(apiurl, prisma)
     if (weather.error) {
       return res.status(404).send(weather)
     }
