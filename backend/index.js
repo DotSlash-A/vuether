@@ -31,7 +31,6 @@ app.get('/', (req, res) => {
   console.log(process.env.API_KEY)
   res.send('Hello World!')
 })
-
 app.post('/api/weather', async (req, res) => {
   const { city } = req.body
   if (!city) {
