@@ -1,0 +1,11 @@
+{
+  "main": {
+    "temp": 303.2,
+    "feels_like": 309.32,
+    "temp_min": 303.2,
+    "temp_max": 303.2,
+    "pressure": 1008,
+    "humidity": 74
+  },
+  "name": "Delhi"
+}

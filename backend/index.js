@@ -37,15 +37,56 @@ app.post('/api/weather', async (req, res) => {
   if (!city) {
     return res.status(404).send(`No such city`)
   }
+  const { data, error } = await supabase
+    .from('weather_data')
+    .select()
+    .ilike('name', city)
+  if (data.length != 0) {
+    console.log("from database")
+    const n = data.length
+    const lastrow = data[n-1]
+    const { created_at }= lastrow
+    console.log(created_at)
+    const storedDate = new Date(created_at);
+
+    const currentDate = new Date();
+    
+    const timeDifference = currentDate - storedDate;
+    console.log(timeDifference);
+    const differenceInMinutes = timeDifference / (1000 * 60);
+    console.log(differenceInMinutes);
+    if (differenceInMinutes <= 30){
+      return res.status(200).send(lastrow)
+    }
+  }
 
   const apiurl = `${baseurl}?q=${city}&appid=${process.env.API_KEY}`
   try {
     const { data } = await axios.get(apiurl)
-    return res.status(200).send(data)
+    const { main, name } = data
+    const { temp, feels_like, temp_min, temp_max, pressure, humidity } = main
+    const weather = {
+      temp,
+      feels_like,
+      temp_min,
+      temp_max,
+      pressure,
+      humidity,
+      name
+    }
+    const { error } = await supabase
+      .from('weather_data')
+      .insert(weather)
+    if (error) {
+      console.log(error)
+      return res.status(500).send("something went wrong")
+    }
+    return res.status(200).send(weather)
   } catch (e) {
     return res.status(404).send("city not found")
   }
 })
+
 
 app.post('/api/register', async (req, res) => {
   const { username: uname, password } = req.body
@@ -79,7 +120,6 @@ app.post('/api/register', async (req, res) => {
   } catch (e) {
     console.error(e);
   }
-
 })
 
 app.post('/api/login', async (req, res) => {
@@ -125,9 +165,14 @@ const loginRequired = (req, res, next) => {
   }
 };
 
-app.get('/protected',loginRequired,(req,res)=>{
+app.get('/protected', loginRequired, (req, res) => {
   return res.status(200).send("this is protected")
 })
+
+// app.get('/api/database', async (req, res) => {
+
+// })
+
 
 
 
