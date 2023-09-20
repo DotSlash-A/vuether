@@ -1,6 +1,7 @@
 require('dotenv').config()
 const axios = require("axios")
 import cors from "cors"
+import { readCache } from "./controllers/checkForCache"
 
 
 const express = require('express')
@@ -13,7 +14,6 @@ const baseurl = "https://api.openweathermap.org/data/2.5/weather"
 const jwt = require('jsonwebtoken');
 
 app.use(cors())
-
 
 
 const { createClient } = require('@supabase/supabase-js')
@@ -37,29 +37,10 @@ app.post('/api/weather', async (req, res) => {
   if (!city) {
     return res.status(404).send(`No such city`)
   }
-  const { data, error } = await supabase
-    .from('weather_data')
-    .select()
-    .ilike('name', city)
-  if (data.length != 0) {
-    console.log("from database")
-    const n = data.length
-    const lastrow = data[n-1]
-    const { created_at }= lastrow
-    console.log(created_at)
-    const storedDate = new Date(created_at);
-
-    const currentDate = new Date();
-    
-    const timeDifference = currentDate - storedDate;
-    console.log(timeDifference);
-    const differenceInMinutes = timeDifference / (1000 * 60);
-    console.log(differenceInMinutes);
-    if (differenceInMinutes <= 30){
-      return res.status(200).send(lastrow)
-    }
+  const lastrow = await readCache(city, supabase)
+  if (lastrow){
+    return res.status(200).send(lastrow)
   }
-
   const apiurl = `${baseurl}?q=${city}&appid=${process.env.API_KEY}`
   try {
     const { data } = await axios.get(apiurl)
