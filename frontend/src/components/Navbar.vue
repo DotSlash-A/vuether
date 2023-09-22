@@ -1,14 +1,19 @@
 <template>
-  <nav class="container is-max-desktop p-4">
-    <div class="is-flex is-flex-direction-row is-align-items-center">
+  <nav class="columns p-4 has-text-white-ter">
+    <div class="column is-1">
+      <span class="icon">
+        <i class="fa-solid fa-bars"></i>
+      </span>
 
-      <p class="is-flex-grow-2 m-4 has-text-white"> <i class="fa-solid fa-location-dot p-1">Hyderabad</i></p>
-      <input type="text" placeholder="search city..."
-        class="input is-rounded m-4 has-background-dark has-text-white no-border" />
+    </div>
+    <div class="column is-10 has-text-centered ">
+      <p class="raleway-font">Bengaluru</p>
+    </div>
 
-
-      <img class="is-rounded m-4" src="https://bulma.io/images/placeholders/128x128.png"
-        style="border-radius: 100px; width:50px; height: 50px;">
+    <div class="column is-1">
+      <span class="icon">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </span>
     </div>
   </nav>
 </template>
@@ -28,6 +33,7 @@ export default {
 .no-border {
   border: none;
 }
+
 input::placeholder {
   color: #E0E1E4;
 }

@@ -1,63 +1,25 @@
 <template>
-  <div class="columns">
-    <div class="column has-background-success is-three-quarters">
-      <div class="is-flex is-flex-direction-row p-2">
-        <p class="m-2 mr-4">Today</p>
-        <p class="m-2 mr-4">Tomorrow</p>
-        <p class="m-2">Next 7 days</p>
+  <div class="has-text-white-ter  has-text-centered mt-6 mb-6">
+    <i class="fa-solid fa-cloud big-weather-icon"></i>
+    <p class="mt-5 raleway-font">Cloudy</p>
+  </div>
+
+  <div class="columns  ">
+    <div class="column is-6">
+      <div class="is-flex is-flex-direction-column has-background-white-ter has-text-centered p-4 round circle  ">
+
+        <p class="is-size-1 mt-2"> 26°C</p>
+        <p class="mb-2"> H:26°C L:22°C</p>
       </div>
-
-      <div class="is-flex is-flex-direction-row">
-        <div class="m-2" style="width: 300px">
-          <div class="is-flex is-flex-direction-column">
-            <!-- 1st row -->
-            <div
-              class="is-flex is-flex-direction-row is-justify-content-space-between p-2"
-              style="background-color: aquamarine"
-            >
-              <p class="m-1">Monday</p>
-              <p class="m-1">11:42 PM</p>
-            </div>
-
-            <!-- 2nd row -->
-            <div
-              class="is-flex is-flex-direction-row is-justify-content-space-between p-2"
-              style="background-color: aquamarine"
-            >
-              <p class="m-1 is-size-3 has-text-bold">22°C</p>
-              <p class="m-1 is-size-3">
-                <i class="fa-solid fa-cloud-sun-rain"></i>
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="m-2">
-          <div class="is-flex is-flex-direction-column">
-            <!-- 1st row -->
-            <div
-              class="is-flex is-flex-direction-row is-justify-content-space-between p-2"
-              style="background-color: aquamarine"
-            >
-              <p class="m-1">Tuesday</p>
-            </div>
-
-            <!-- 2nd row -->
-            <div
-              class="is-flex is-flex-direction-row is-justify-content-space-between p-2"
-              style="background-color: aquamarine"
-            >
-              <p class="m-1 is-size-3 has-text-bold">25°C</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      
     </div>
+    <div class="column is-6 ">
+      <div class="is-flex is-flex-direction-column p-4">
 
-    <div class="column has-background-link">Second colun</div>
-
-    <div class="columns is-mobile">
-      <div class="column is-4 is-offset-8"></div>
+        <p class="round has-background-white-ter has-text-centered p-4 mb-2 pill">2nd colum</p>
+        <p class="round has-background-white-ter has-text-centered p-4 pill">2nd colum</p>
+        
+      </div>
     </div>
   </div>
 </template>
@@ -127,4 +89,24 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.big-weather-icon {
+  font-size: 10rem;
+}
+
+.round{
+  border-radius: 999px;
+
+}
+.pill{
+
+  width: 10rem;
+  
+
+}
+
+.circle{
+  width: 10rem;
+  height:10rem;
+}
+</style>

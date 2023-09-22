@@ -1,13 +1,5 @@
 <template>
-  <div class="card p-2" v-if="displayWeather">
-    <div class="is-flex is-flex-direction-row">
-      <div class="is-flex is-flex-direction-column">
-        <p class="is-text-4">Current Weather</p>
-        <p class="is-text-1 has-text-weight-bold">{{ weatherStore.temp }}K</p>
-      </div>
-      <div class="is-flex is-flex-direction-column"></div>
-    </div>
-  </div>
+
 </template>
 
 <script>
