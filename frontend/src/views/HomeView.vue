@@ -5,7 +5,7 @@
   </div>
 
   <div class="columns  ">
-    <div class="column is-6">
+    <div class="column is-6 is-flex is-flex-direction-row is-justify-content-center">
       <div class="is-flex is-flex-direction-column has-background-white-ter has-text-centered p-4 round circle  ">
 
         <p class="is-size-1 mt-2"> 26°C</p>
@@ -15,7 +15,6 @@
     </div>
     <div class="column is-6 ">
       <div class="is-flex is-flex-direction-column p-4">
-
         <p class="round has-background-white-ter has-text-centered p-4 mb-2 pill">2nd colum</p>
         <p class="round has-background-white-ter has-text-centered p-4 pill">2nd colum</p>
         

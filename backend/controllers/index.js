@@ -9,14 +9,24 @@ async function readCache(city, prisma) {
 
   const latestQuery = await prisma.weather_data.findMany({
     orderBy: {
-        id: 'desc',
+      id: 'desc',
+    },
+    where:{
+      name:{
+        equals: city,
+        mode: 'insensitive',
+      },
+
     },
     take: 1,
-})
+  })
 
 
-  if (latestQuery) {
-    const { created_at } = latestQuery
+  console.log(latestQuery);
+
+
+  if (latestQuery[0]) {
+    const { created_at } = latestQuery[0]
     const storedDate = new Date(created_at);
     const currentDate = new Date();
     const timeDifference = currentDate - storedDate;
@@ -30,7 +40,7 @@ async function readCache(city, prisma) {
   }
 }
 
-async function CallApiForData(apiurl, supabase) {
+async function CallApiForData(apiurl, prisma) {
   try {
     const { data } = await axios.get(apiurl)
     const { main, name } = data
@@ -44,11 +54,13 @@ async function CallApiForData(apiurl, supabase) {
       humidity,
       name
     }
+    // console.log(weather);
     const newData = await prisma.weather_data.create({
       data: {
-       ...weather 
+        ...weather
       },
     })
+    // console.log(newData);
     // const { error } = await supabase
     //   .from('weather_data')
     //   .insert(weather)

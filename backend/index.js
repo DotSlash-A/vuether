@@ -95,15 +95,15 @@ app.post('/api/login', async (req, res) => {
     return res.status(404).send("user does not exist")
   }
 
-  bcrypt.compare(password, data[0].password, function (err, result) {
+  bcrypt.compare(password, user.password, function (err, result) {
     console.log(err);
     // result == true
     if (!result) {
       return res.status(409).send("password does not match")
     }
     const token = jwt.sign({
-      id: data[0].id,
-      username: data[0].username
+      id: user.id.toString(),
+      username: user.username
     }, 'michu', { expiresIn: '36h' });
     return res.status(200).send({ token: token })
 
@@ -140,11 +140,13 @@ app.post('/api/weather', loginRequired, async (req, res) => {
     return res.status(404).send(`No such city`)
   }
   const lastrow = await readCache(city, prisma)
+  // console.log(lastrow);
   if (lastrow) {
     return res.status(200).send(lastrow)
   }
   else {
     const weather = await CallApiForData(apiurl, prisma)
+    // console.log(weather);
     if (weather.error) {
       return res.status(404).send(weather)
     }
